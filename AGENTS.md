@@ -138,3 +138,13 @@ Follow `CLAUDE.md`. It covers quality gates, layering, commit rules and how to r
   GitHub profiles). Never hand-edit `contributors.json`.
 - Maintainers refresh the stats with `python3 ../../craftrules/scripts/contributors.py .` (it also
   re-verifies who wrote each `people.toml` entry; `--check` only verifies).
+
+## Repository-specific deterministic quality contract (2026-10-26)
+
+**Project:** Rust PDF editing/viewer workspace.
+
+**Engineering requirements:** Protect PDF object structure, export round trips, fonts, embedded assets, and rendering parity tests with golden files.
+
+**Verification commands:** cargo fmt --all -- --check; cargo metadata --locked --no-deps --format-version 1; targeted cargo test.
+
+Run relevant tests and give actual outputs, including failures. Add regression coverage for behavior, edges and error paths. Never weaken/delete/skip tests, suppress errors or reduce thresholds solely to get CI green. Changes to this file, `QUALITY_GATES.md`, workflows and test policy require human review. Make the `quality` check required on protected branches. Disclose missing system dependencies. Preserve existing instructions.
